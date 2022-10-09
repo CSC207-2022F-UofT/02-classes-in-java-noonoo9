@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * This file contains a few exercises to familiarize you with specific
@@ -85,9 +86,6 @@ public class Silly implements Comparable<Silly>{
     }
 
 
-
-
-
     public static void main(String[] args) {
         /**
          * Task 1 (continued): The below demonstrates how each of the Silly
@@ -120,7 +118,7 @@ public class Silly implements Comparable<Silly>{
         y.countStatic();
         x.countStatic();
         x.countStatic();
-        int[] expected_values = {0, 0, 1, 2};
+        int[] expected_values = {0, 1, 2, 3};
 
         System.out.println("The countStatic calls will return " + Arrays.toString(expected_values));
     }
@@ -158,21 +156,36 @@ public class Silly implements Comparable<Silly>{
          *                We've started it by checking the type of o for you.
          *                You just need to return true if the names are equal.
          */
-        if (!(o instanceof Silly)) {
-            return false;
-        }
         if (this == o) {
             return true;
         }
-
-        Silly other = (Silly) o; // To access .name of o, we need to cast it.
-        // Hint: to compare strings, we need to use .equals()
-        //       e.g. s1.equals(s2)
-        if (this.name != other.name) {
+        if (o == null) {
             return false;
         }
-        return true;
+        if (getClass() != o.getClass()) {
+            return false;
+        }
+
+        Silly other = (Silly) o;
+        return Objects.equals(other, other.name);
+
     }
+
+    //        if (!(o instanceof Silly)) {
+//            return false;
+//        }
+//        if ((this.equals(o))) {
+//            return true;
+//        }
+//
+//        Silly other = (Silly) o;
+//        if (!(this.name.equals(other.name))) {
+//            return false;
+//        }
+//        return true;
+
+
+
 
     /**
      * 5. If we want to compare two objects, we have to do two things:
